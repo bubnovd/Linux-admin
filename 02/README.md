@@ -21,17 +21,18 @@
 
 Проверка:
 
-`cat /proc/mdstat`
-
-`mdadm -D /dev/md0`
+```
+cat /proc/mdstat
+mdadm -D /dev/md0
+```
 
 ### Создать конфиг
 Для того, чтобы быть уверенным что ОС запомнила какой RAID массив требуется создать и какие компоненты в него входят создадим файл mdadm.conf
 
-`echo "DEVICE partitions" > /etc/mdadm/mdadm.conf`
-
-`mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf`
-
+```
+echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
+mdadm --detail --scan --verbose | awk '/ARRAY/ {print}' >> /etc/mdadm/mdadm.conf
+```
 
 ### Проверка работоспособности
 Искусственно фэйлим один диск
@@ -40,9 +41,10 @@
 
 Проверяем
 
-`cat /proc/mdstat`
-
-`mdadm -D /dev/md0`
+```
+cat /proc/mdstat
+mdadm -D /dev/md0
+```
 
 Удаляем диск из массива
 
@@ -70,7 +72,7 @@ parted /dev/md0 mkpart primary ext4 80% 100%
 `for i in $(seq 1 5); do sudo mkfs.ext4 /dev/md0p$i; done`
 
 Монтируем
-
-`mkdir -p /raid/part{1,2,3,4,5}`
-
-`for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done`
+```
+mkdir -p /raid/part{1,2,3,4,5}
+for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done
+```
