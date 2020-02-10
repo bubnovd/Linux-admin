@@ -13,10 +13,13 @@
 ### Собрать RAID
 Занулим на всякий случай суперблоки:
 `mdadm --zero-superblock --force /dev/sd{b,c,d,e,f}`
+
 Создаем RAID:
 `mdadm --create --verbose /dev/md0 -l 6 -n 5/dev/sd{b,c,d,e,f}`
+
 Проверка:
 `cat /proc/mdstat`
+
 `mdadm -D /dev/md0`
 
 ### Создать конфиг
