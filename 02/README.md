@@ -51,6 +51,7 @@ mdadm -D /dev/md0
 `mdadm /dev/md0 --remove /dev/sde`
 
 Вставляем новый диск
+
 `mdadm /dev/md0 --add /dev/sde`
 
 ### Создать FS
