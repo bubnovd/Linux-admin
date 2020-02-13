@@ -1,1 +1,1 @@
-{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/devi1/Documents/OTUS/02","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/home/devi1/Documents/OTUS/Linux-admin_OTUS/02","disabled":false,"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}
