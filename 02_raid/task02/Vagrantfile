@@ -8,22 +8,22 @@ MACHINES = {
 	:disks => {
 		:sata1 => {
 			:dfile => './sata1.vdi',
-			:size => 4096,
+			:size => 5000,
 			:port => 1
 		},
 		:sata2 => {
                         :dfile => './sata2.vdi',
-                        :size => 4096, # Megabytes
+                        :size => 5000, # Megabytes
 			:port => 2
 		},
                 :sata3 => {
                         :dfile => './sata3.vdi',
-                        :size => 4096,
+                        :size => 5000,
                         :port => 3
                 },
                 :sata4 => {
                         :dfile => './sata4.vdi',
-                        :size => 4096,
+                        :size => 5000,
                         :port => 4
                 }
 	}
@@ -71,10 +71,10 @@ Vagrant.configure("2") do |config|
                         for i in {b..e}; do
                                 parted -s /dev/sd$i mklabel gpt
                                 # /home /dev/sdX1
-                                parted /dev/sd$i mkpart primary 3GiB 100%
+                                parted /dev/sd$i mkpart primary 4GiB 100%
                                 parted /dev/sd$i name 1 home
                                 # /var /dev/sdX2
-                                parted /dev/sd$i mkpart primary 2GiB 3GiB
+                                parted /dev/sd$i mkpart primary 3GiB 4GiB
                                 parted /dev/sd$i name 2 var;
                                 done
                         for i in {b,c}; do
@@ -86,12 +86,12 @@ Vagrant.configure("2") do |config|
                                 parted /dev/sd$i mkpart primary 50MiB 100MiB
                                 parted /dev/sd$i name 4 boot
                                 # / /dev/sd{b,c}5
-                                parted /dev/sd$i mkpart primary 100MiB 1GiB
+                                parted /dev/sd$i mkpart primary 100MiB 2GiB
                                 parted /dev/sd$i name 5 rootfs;
                                 done
                         for i in {d,e}; do
                                 # swap /dev/sd{d,e}3
-                                parted /dev/sd$i mkpart primary 1GiB 2GiB
+                                parted /dev/sd$i mkpart primary 2GiB 3GiB
                                 parted /dev/sd$i name 3 swap;
                                 done
                 SHELL
@@ -135,8 +135,8 @@ Vagrant.configure("2") do |config|
                         mount /dev/md2 /mnt/var
                         mount /dev/md3 /mnt/home
                         
-                        for mntpt in home var boot; do cp -r /$mntpt/* /mnt/$mntpt; done
-                        #rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/swapfile","/var","/boot","/home"} / /mnt/root/
+                        for mntpt in home var boot; do rsync -aAXv  /$mntpt/* /mnt/$mntpt; done
+                        rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/swapfile","/var","/boot","/home"} / /mnt/root/
                 SHELL
             end
             box.vm.provision "fstab", after: "sync_data", type: "shell" do |s|
@@ -149,6 +149,8 @@ Vagrant.configure("2") do |config|
 
                         grub2-install /dev/sdb
                         grub2-install /dev/sdc
+                        #device.map
+                        #grub2-mkconfig -o /mnt/boot/grub2/grub.cfg.grub-mkconfig
                         #grub2-mkconfig
                                                 #update-grub
 
