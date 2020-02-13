@@ -1,0 +1,152 @@
+# -*- mode: ruby -*-
+# vim: set ft=ruby :
+
+MACHINES = {
+  :mdadm => {
+        :box_name => "centos/7",
+        :ip_addr => '192.168.11.101',
+	:disks => {
+		:sata1 => {
+			:dfile => './sata1.vdi',
+			:size => 4096,
+			:port => 1
+		},
+		:sata2 => {
+                        :dfile => './sata2.vdi',
+                        :size => 4096, # Megabytes
+			:port => 2
+		},
+                :sata3 => {
+                        :dfile => './sata3.vdi',
+                        :size => 4096,
+                        :port => 3
+                },
+                :sata4 => {
+                        :dfile => './sata4.vdi',
+                        :size => 4096,
+                        :port => 4
+                }
+
+	}
+
+		
+  },
+}
+
+Vagrant.configure("2") do |config|
+
+  MACHINES.each do |boxname, boxconfig|
+
+      config.vm.define boxname do |box|
+
+          box.vm.box = boxconfig[:box_name]
+          box.vm.host_name = boxname.to_s
+
+          #box.vm.network "forwarded_port", guest: 3260, host: 3260+offset
+          box.vm.synced_folder ".", "/vagrant", disabled: true
+
+          box.vm.network "private_network", ip: boxconfig[:ip_addr]
+
+          box.vm.provider :virtualbox do |vb|
+            	  vb.customize ["modifyvm", :id, "--memory", "1024"]
+                  needsController = false
+		  boxconfig[:disks].each do |dname, dconf|
+			  unless File.exist?(dconf[:dfile])
+				vb.customize ['createhd', '--filename', dconf[:dfile], '--variant', 'Fixed', '--size', dconf[:size]]
+                                needsController =  true
+                          end
+
+		  end
+                  if needsController == true
+                     vb.customize ["storagectl", :id, "--name", "SATA", "--add", "sata" ]
+                     boxconfig[:disks].each do |dname, dconf|
+                         vb.customize ['storageattach', :id,  '--storagectl', 'SATA', '--port', dconf[:port], '--device', 0, '--type', 'hdd', '--medium', dconf[:dfile]]
+                     end
+                  end
+          end
+ 	  box.vm.provision "shell", inline: <<-SHELL
+	      mkdir -p ~root/.ssh
+              cp ~vagrant/.ssh/auth* ~root/.ssh
+	      yum install -y mdadm smartmontools hdparm gdisk
+            SHELL
+            box.vm.provision "partitions", after: "shell", type: "shell" do |s|
+                s.inline = <<-SHELL
+                        for i in {b..e}; do parted -s /dev/sd$i mklabel gpt
+                                # /home /dev/sdX1
+                                parted /dev/sd$i mkpart primary 3GiB 100%
+                                # /var /dev/sdX2
+                                parted /dev/sd$i mkpart primary 2GiB 3GiB;
+                                done
+                        for i in {b,c}; do
+                                # /boot /dev/sd{b,c}3
+                                parted /dev/sd$i mkpart primary 0 50MiB
+                                # / /dev/sd{b,c}4
+                                parted /dev/sd$i mkpart primary 50MiB 1GiB;
+                                done
+                        for i in {d,e}; do
+                                # swap /dev/sd{d,e}3
+                                parted /dev/sd$i mkpart primary linux-swap 1GiB 2GiB;
+                                done
+                SHELL
+            end
+            box.vm.provision "raid", after: "partitions", type: "shell" do |s|
+                s.inline = <<-SHELL
+                        mdadm --zero-superblock --force /dev/sd{b,c,d,e}{1..3}
+                        mdadm --zero-superblock --force /dev/sd{b,c}4
+                        # /boot
+                        yes | mdadm --create /dev/md0 --force -l 1 -n 2 /dev/sd{b,c}3 --metadata=0.9
+                        # /
+                        yes | mdadm --create /dev/md1 --force -l 1 -n 2 /dev/sd{b,c}4
+                        # /var
+                        mdadm --create /dev/md2 --force -l 10 -n 4 /dev/sd{b..e}2
+                        # /home
+                        mdadm --create /dev/md3 --force -l 5 -n 4 /dev/sd{b..e}1
+                        # swap
+                        yes | mdadm --create /dev/md4 --force -l 1 -n 2 /dev/sd{d,e}3 
+
+                        mkdir /etc/mdadm/
+                        echo "DEVICE partitions" > /etc/mdadm/mdadm.conf
+                        mdadm --detail --scan --verbose | awk "/ARRAY/{print}" >> /etc/mdadm/mdadm.conf
+                        for i in $(seq 1 3); do
+                                parted -s /dev/md$i mklabel gpt
+                                mkfs.ext4 /dev/md$i;
+                                done
+                        # swap
+                        mkswap /dev/md4
+                        # format boot partition
+                        parted -s /dev/md0 mklabel primary
+                        parted set /dev/md0 boot on
+                        mkfs.ext2 /dev/md0
+                SHELL
+            end
+            box.vm.provision "sync_data", after: "raid", type: "shell" do |s|
+                s.inline = <<-SHELL
+                        for mntpt in root home var boot; do mkdir /mnt/$mntpt; done
+                        mount /dev/md0 /mnt/boot
+                        mount /dev/md1 /mnt/root
+                        mount /dev/md2 /mnt/var
+                        mount /dev/md3 /mnt/home
+                        
+                        for mntpt in home var boot; do cp -r /$mntpt/* /mnt/$mntpt; done
+                        rsync -aAXv --exclude={"/dev/*","/proc/*","/sys/*","/tmp/*","/run/*","/mnt/*","/swapfile","/var","/boot","/home"} / /mnt/root/
+                SHELL
+            end
+            box.vm.provision "fstab", after: "sync_data", type: "shell" do |s|
+                s.inline = <<-SHELL
+                        echo "/dev/md0 /boot  ext4 defaults 0 0" > /etc/fstab
+                        echo "/dev/md1 /  ext4 defaults 0 0" >> /etc/fstab
+                        echo "/dev/md2 /var  ext4 defaults 0 0" >> /etc/fstab
+                        echo "/dev/md3 /home  ext4 defaults 0 0" >> /etc/fstab
+                        echo "/dev/md4 /swapfile  none swap defaults 0 0" >> /etc/fstab
+                        #grub2-install /dev/md0
+                        #update-grub
+                        #grub2-install /dev/sdb
+                        #grub2-install /dev/sdc
+                        #grub2-mkconfig
+                SHELL
+            end
+      end
+  end
+end
+
+

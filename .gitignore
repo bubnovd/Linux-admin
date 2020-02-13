@@ -1,4 +1,4 @@
 *.vdi
 *.box
-packer_cache/
 .vagrant/
+packer_cache/
