@@ -79,3 +79,4 @@ for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done
 ```
 
 - part-type важен только для MBR разделов. В GPT всегда primary
+- [перенос дескрипторов рабочих процесов](https://www.redpill-linpro.com/sysadvent/2015/12/04/changing-a-process-file-descriptor-with-gdb.html)
