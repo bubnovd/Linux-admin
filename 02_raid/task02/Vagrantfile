@@ -149,8 +149,9 @@ Vagrant.configure("2") do |config|
 
                         grub2-install /dev/sdb
                         grub2-install /dev/sdc
+                        dracut --mdadmconf --fstab --add="mdraid"  --add-drivers="raid1" --force /mnt/boot/initramfs-$(uname -r).img $(uname -r) -M
                         #device.map
-                        #grub2-mkconfig -o /mnt/boot/grub2/grub.cfg.grub-mkconfig
+                        grub2-mkconfig -o /mnt/boot/grub2/grub.cfg.grub-mkconfig
                         #grub2-mkconfig
                                                 #update-grub
 
