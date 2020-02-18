@@ -1,5 +1,5 @@
 # 01. Kernel
-## Utilites & man pages
+### Utilites & man pages
 man 2 fstat
 mmap
 mprotect
@@ -23,7 +23,7 @@ overbooking
 ncdu
 block. superblock. inode. hardlink.
 
-## Utilites & man pages
+### Utilites & man pages
 dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs
 
 - [LVM Cache](http://man7.org/linux/man-pages/man7/lvmcache.7.html)
