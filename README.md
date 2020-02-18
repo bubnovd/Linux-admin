@@ -23,7 +23,7 @@
 - block. superblock. inode. hardlink.
 
 ### Utilites & man pages
-dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs, stat, ncdu, lsof, fuser, fsck, mkfs, mount, blockdev, debugfs
+dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs, stat, ncdu, lsof, fuser, fsck, mkfs, mount, blockdev, debugfs, xfs_info, mount
 
 - [LVM Cache](http://man7.org/linux/man-pages/man7/lvmcache.7.html)
 - [sysfs](http://man7.org/linux/man-pages/man5/sysfs.5.html#NOTES)
