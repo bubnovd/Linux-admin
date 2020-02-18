@@ -1,8 +1,8 @@
 # 01. Kernel
 ### Utilites & man pages
-man 2 fstat
-mmap
-mprotect
+- man 2 fstat
+- mmap
+- mprotect
 
 - [Ядро и функции](https://pustovoi.ru/2010/1033)
 ---
@@ -14,17 +14,16 @@ mprotect
 ---
 # 03. LVM, FS
 
-Copy on write snapshot
-Thin provisioning
-LVM stripes
-device mapper
-Почиттаь про LVM Snapshot
-overbooking
-ncdu
-block. superblock. inode. hardlink.
+- Copy on write snapshot
+- Thin provisioning
+- LVM stripes
+- device mapper
+- Почиттаь про LVM Snapshot
+- overbooking
+- block. superblock. inode. hardlink.
 
 ### Utilites & man pages
-dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs
+dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs, stat, ncdu, lsof, fuser, fsck, mkfs, mount, blockdev, debugfs
 
 - [LVM Cache](http://man7.org/linux/man-pages/man7/lvmcache.7.html)
 - [sysfs](http://man7.org/linux/man-pages/man5/sysfs.5.html#NOTES)
