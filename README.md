@@ -20,6 +20,7 @@
 - device mapper
 - Почиттаь про LVM Snapshot
 - overbooking
+- tmpfs. ramfs. rootfs. initramfs
 
 - [x] где хранятся inodes? Каков их размер?
 - [x] где устанавливается кол-во inodes

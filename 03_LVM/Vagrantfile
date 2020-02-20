@@ -6,6 +6,7 @@ ENV["LC_ALL"] = "en_US.UTF-8"
 MACHINES = {
   :lvm => {
         :box_name => "centos/7",
+        :box_version => "1804.02",
         :ip_addr => '192.168.11.101',
     :disks => {
         :sata1 => {
@@ -33,7 +34,12 @@ MACHINES = {
 }
 
 Vagrant.configure("2") do |config|
-
+   # проверка отключения плагина для ускорения сборки на ноуте 
+    if Vagrant.has_plugin?("vagrant-vbguest")
+        config.vbguest.auto_update = false
+    end
+    
+    config.vm.box_version = "1804.02"
     MACHINES.each do |boxname, boxconfig|
   
         config.vm.define boxname do |box|
