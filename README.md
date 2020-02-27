@@ -20,17 +20,21 @@
 - device mapper
 - Почиттаь про LVM Snapshot
 - overbooking
+- CLVM
+- HA-LVM
 
 - [x] где хранятся inodes? Каков их размер?
 - [x] где устанавливается кол-во inodes
 - reserved block count - зарезервированные 5% блоков диска. Изменяемо
 
 ### Utilites & man pages
-dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs, stat, ncdu, lsof, fuser, fsck, mkfs, mount, blockdev, debugfs, xfs_info, mount, ls -i, find, hdparm, smartctl
+dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs, stat, ncdu, lsof, fuser, fsck, mkfs, mount, blockdev, debugfs, xfs_info, mount, ls -i, find, hdparm, smartctl, lvcreate(8), lvconvert(8), lvchange(8), dm_multipath, multipathd,  dm_crypt,  cryptsetup(8), dmsetup
 
 - [LVM Cache](http://man7.org/linux/man-pages/man7/lvmcache.7.html)
 - [sysfs](http://man7.org/linux/man-pages/man5/sysfs.5.html#NOTES)
 - [inodes](https://pustovoi.ru/2019/3053)
+- [LVM Snapshot & Virtualization](https://www.ibm.com/developerworks/ru/library/l-lvm2/)
+- [RedHat LVM Administrator Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/logical_volume_manager_administration/index) [RU](https://access.redhat.com/documentation/ru-ru/red_hat_enterprise_linux/5/html/cluster_suite_overview/s1-clvm-overview-cso)
 
 В современных системах имеет смысл выделять при установке:
 /           - 8G
@@ -73,3 +77,9 @@ Inode (индексный дескриптор) - информация о фай
 Состоит из ячеек флеш памяти, каждая из которых гораздо медленнее HDD, но благодаря параллельности работает быстрее. Страница (4 KiB) может быть перезаписана ограниченное количество раз. Поэтому прошивка распределяет запись между всеми страницами. Похоже на virtual memory
 
 Страницы должны быть стерты перед записью. Стирание - гораздо более медленная опрерация, чем запись. Отдельные страницы не стираются - только кластеры из смежных страниц (обычно 128 страниц или 512 KiB)
+
+---
+[Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
+LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
+File Systems: Deny root delete, Suid Bit, Journaling file system, COW
+Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, Swarm
