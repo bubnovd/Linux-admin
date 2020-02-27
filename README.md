@@ -38,9 +38,9 @@ dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs, stat,
 - [RedHat LVM Administrator Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/logical_volume_manager_administration/index) [RU](https://access.redhat.com/documentation/ru-ru/red_hat_enterprise_linux/5/html/cluster_suite_overview/s1-clvm-overview-cso)
 
 В современных системах имеет смысл выделять при установке:
-/           - 8G
+/     - 8G
 /home - 8G
-/var      - 16G
+/var  - 16G
 
 Для приложений стоит выделять отдельные тома (например для mysql - отдельный том в /var/lib/mysql)
 
@@ -79,8 +79,20 @@ Inode (индексный дескриптор) - информация о фай
 
 Страницы должны быть стерты перед записью. Стирание - гораздо более медленная опрерация, чем запись. Отдельные страницы не стираются - только кластеры из смежных страниц (обычно 128 страниц или 512 KiB)
 
+
+---
+# 04. Boot, BIOS, GRUB
+
+/proc/cmdline - строка запуска ядра, конфигурация
+
+### Utilites & man pages
+bootparam, 
+
+
+
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
 LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
 File Systems: Deny root delete, Suid Bit, Journaling file system, COW
 Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, Swarm
+
