@@ -81,3 +81,10 @@ for i in $(seq 1 5); do mount /dev/md0p$i /raid/part$i; done
 
 - part-type важен только для MBR разделов. В GPT всегда primary
 - [перенос дескрипторов рабочих процесов](https://www.redpill-linpro.com/sysadvent/2015/12/04/changing-a-process-file-descriptor-with-gdb.html)
+
+Кажется, здесь решение:
+```
+Сымитируем текущий root -> сделаем в него chroot и обновим grub:[root@otuslinux ~]# for i in /proc/ /sys/ /dev/ /run/ /boot/; do mount --bind $i /mnt/$i; done[root@otuslinux ~]# chroot /mnt/[root@otuslinux ~]# grub2-mkconfig -o /boot/grub2/grub.cfg
+
+cd /boot ; for i in `ls initramfs-*img`; do dracut -v $i `echo $i|sed "s/initramfs-//g; s/.img//g"` --force; done
+```

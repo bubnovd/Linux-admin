@@ -22,6 +22,7 @@
 - overbooking
 - CLVM
 - HA-LVM
+- tmpfs. ramfs. rootfs. initramfs
 
 - [x] где хранятся inodes? Каков их размер?
 - [x] где устанавливается кол-во inodes
