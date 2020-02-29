@@ -36,6 +36,7 @@ dumpe2fs, lsblk, blkid, pdflush, man hier, man fsync, man 2 sync, tune2fs, stat,
 - [inodes](https://pustovoi.ru/2019/3053)
 - [LVM Snapshot & Virtualization](https://www.ibm.com/developerworks/ru/library/l-lvm2/)
 - [RedHat LVM Administrator Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/logical_volume_manager_administration/index) [RU](https://access.redhat.com/documentation/ru-ru/red_hat_enterprise_linux/5/html/cluster_suite_overview/s1-clvm-overview-cso)
+- [как используется дисковое пространство в Linux](https://habr.com/ru/company/flant/blog/354802/)
 
 В современных системах имеет смысл выделять при установке:
 /     - 8G
@@ -86,7 +87,9 @@ Inode (индексный дескриптор) - информация о фай
 /proc/cmdline - строка запуска ядра, конфигурация
 
 ### Utilites & man pages
-bootparam, 
+bootparam, mkinitrd
+
+- [initrd](https://en.wikipedia.org/wiki/Initial_ramdisk)
 
 
 
