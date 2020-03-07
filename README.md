@@ -92,6 +92,30 @@ bootparam, mkinitrd
 - [initrd](https://en.wikipedia.org/wiki/Initial_ramdisk)
 
 
+---
+# 05. SystemD
+
+/sbin/init
+fork, setsid
+В основе systemd лежит cgroups
+Systemd-nspawn
+
+![systemd](img/systemd.png)
+
+### Utilites & man pages
+- telinit
+- systemd-analyze time, systemd-analyze blame
+- man systemd-system.conf
+- ulimit
+- [setrlimit](http://man7.org/linux/man-pages/man2/setrlimit.2.html)
+- [mount](https://www.freedesktop.org/software/systemd/man/systemd.mount.html)
+- [timer](https://www.freedesktop.org/software/systemd/man/systemd.timer.html)
+- machinectl
+- [systemd docs](http://0pointer.de/blog/projects/systemd-docs.html)
+
+
+
+
 
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)

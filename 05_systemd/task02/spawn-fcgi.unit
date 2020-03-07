@@ -1,0 +1,12 @@
+[Unit]
+Description = spawn-cgi startup service
+
+[Service]
+Type = simple
+EnvironmentFile = /etc/sysconfig/spawn-fcgi
+ExecStart = /usr/bin/spawn-fcgi -n $OPTIONS
+PIDFile = /var/run/spawn-fcgi.pid
+KillMode = process
+
+[Install]
+WantedBy = multi-user.target
