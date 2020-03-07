@@ -12,3 +12,5 @@
 
 cat access-4560-644067.log | cut -d " " -f 1 | uniq -c | sort -k1 -nr | head -n 10
  cat access-4560-644067.log | cut -d " " -f 7 | uniq -c | sort -nr -k1 | head -n 10
+cat access-4560-644067.log | cut -d \" -f 3 | cut -d " " -f 2 | egrep -v 200\|301
+ cat access-4560-644067.log | cut -d \" -f 3 | cut -d " " -f 2 | sort | uniq -c

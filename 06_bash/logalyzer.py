@@ -7,6 +7,7 @@
 import re
 from pprint import pprint
 log = '/home/devi1/Documents/OTUS/Linux-admin_OTUS/06_bash/access-4560-644067.log'
+requests = []
 
 with open(log, 'r') as f:
     regex = (
@@ -16,4 +17,8 @@ with open(log, 'r') as f:
     )
     result = re.finditer(regex, f.read())
     for match in result:
-        print(match.groups())
+        requests.append(match.groups())
+        #print(match.groups())
+    for request in requests:
+        print(request[0])
+    #print(requests)        
