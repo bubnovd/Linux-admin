@@ -113,9 +113,22 @@ Systemd-nspawn
 - machinectl
 - [systemd docs](http://0pointer.de/blog/projects/systemd-docs.html)
 
+---
+# 06. BASH, AWK
 
+test
+set -x - debug mode
+exec
 
+### Utilites & man pages
+- [Advanced Bash-Scripting Guide](https://www.opennet.ru/docs/RUS/bash_scripting_guide/)
+- [Язык обработки данных AWK](https://www.opennet.ru/docs/RUS/awk/)
+- [sed](https://linuxconfig.org/learning-linux-commands-sed)
+- [bash-скрипты на хабре](https://habr.com/en/company/ruvds/blog/325522/)
+- [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
+- [Bash Cheatsheet](https://devhints.io/bash)
 
+![hotkeys](img/hotkeys.png)
 
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
