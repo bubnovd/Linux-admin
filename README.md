@@ -130,6 +130,11 @@ exec
 
 ![hotkeys](img/hotkeys.png)
 
+
+
+---
+# 07. Package Management
+
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
 LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
