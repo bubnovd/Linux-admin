@@ -1,6 +1,6 @@
 ### Understand and use essential tools
 
-- [] Access a shell prompt and issue commands with correct syntax
+- [ ] Access a shell prompt and issue commands with correct syntax
 
 - [] Use input-output redirection (>, >>, |, 2>, etc.)
 - []  Use grep and regular expressions to analyze text
