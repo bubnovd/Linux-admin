@@ -135,6 +135,14 @@ exec
 ---
 # 07. Package Management
 
+### Utilites & man pages
+- [GNU make](https://www.gnu.org/software/make/manual/make.html)
+- [Mock](https://github.com/rpm-software-management/mock/wiki)
+- [RPM Guide. RU](https://www.opennet.ru/docs/RUS/rpm_guide/)
+- [Сборка RPM - быстрый старт](http://wiki.rosalab.ru/ru/index.php/%D0%A1%D0%B1%D0%BE%D1%80%D0%BA%D0%B0_RPM_-_%D0%B1%D1%8B%D1%81%D1%82%D1%80%D1%8B%D0%B9_%D1%81%D1%82%D0%B0%D1%80%D1%82)
+- [RPM Packaging Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/rpm_packaging_guide/index)
+- [Working with Source RPMs](https://blog.packagecloud.io/eng/2015/04/20/working-with-source-rpms/)
+- [RPM Packaging Guide](https://rpm-packaging-guide.github.io/)
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
 LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
