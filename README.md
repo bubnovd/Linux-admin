@@ -112,6 +112,7 @@ Systemd-nspawn
 - [timer](https://www.freedesktop.org/software/systemd/man/systemd.timer.html)
 - machinectl
 - [systemd docs](http://0pointer.de/blog/projects/systemd-docs.html)
+- [systemd для системного администратора](https://mega.nz/#F!OdFEnYAK!dpUB6_qA_iKD1yTUa9S1_g?KIsjzQaK)
 
 ---
 # 06. BASH, AWK
