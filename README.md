@@ -144,6 +144,21 @@ exec
 - [RPM Packaging Guide](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/rpm_packaging_guide/index)
 - [Working with Source RPMs](https://blog.packagecloud.io/eng/2015/04/20/working-with-source-rpms/)
 - [RPM Packaging Guide](https://rpm-packaging-guide.github.io/)
+
+
+---
+# 08. Processes
+### Utilites & man pages
+- renice
+- ionice
+- setuid, setgid
+- ps
+- smem
+- fork, clone
+- unshare, nsenter
+- [Основы работы с сигналами](https://www.ibm.com/developerworks/ru/library/l-signals_1/index.html)
+- [Updating ulimit on a running Linux process](https://www.gregchapple.com/blog/updating-ulimit-on-running-linux-process/)
+
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
 LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
