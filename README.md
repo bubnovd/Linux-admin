@@ -159,9 +159,95 @@ exec
 - [Основы работы с сигналами](https://www.ibm.com/developerworks/ru/library/l-signals_1/index.html)
 - [Updating ulimit on a running Linux process](https://www.gregchapple.com/blog/updating-ulimit-on-running-linux-process/)
 
+
+![ps](img/ps.png)
+```
+[Forwarded from Протестировал]
+Контейнерная и гипервизорная виртуализация сильно упростили создание тестовых стендов и уже трудно представить как мы обходились без этого раньше. Расстраивает, что из-за высокой популярности инструментов коллеги начинают переусложняют вещи, которые можно было бы сделать проще. Если процессу нужно ограничить доступ к файловой системе, то вполне можно обойтись chroot(8), если нужно изолировать сетевой стек или сделать ограничение по доступу к ресурсам системы, то обойтись unshare(1). Это не намного сложнее, чем использовать тот же docker или podman, но нужно один раз разобраться в том, из чего построены контейнеры.
+
+Базовых механизмов всего четыре:
+
+- namespaces (пространства имён) используются для группировки объектов ядра в различные наборы, к которым могут обращаться определенные деревья процессов. Звучит немного сложно, поэтому сразу пример - пространства имен PID ограничивают представление списка процессов процессами в пространстве имен. Всего есть несколько видов пространства имен, см. ниже.
+- capability используются для более тонкой настройки полномочий для процесса. Если вы использовали опцию -cap-add для docker, то это оно.
+- cgroups это механизм установки ограничений на доступ процесса к ресурсам системы (память, процессор).
+- setrlimit - ещё один механизм для ограничения доступа к ресурсам системы наряду с cgroups. Он старее, чем cgroups, но может делать то, что cgroups не позволяют.
+       
+Пространства имён бывают следующими:
+
+- mount namespace - монтирование и размонтирование ФС не будет иметь никакого эффекта на ФС самой системы.
+- UTS namespace - установка имени машины (hostname) или доменного имени не будет иметь никакого эффекта для основной ОС.
+- IPC namespace - процесс будет иметь независимые от основной ОС объекты IPC: очереди сообщений, семафоры и разделяемую память.
+- network namespace - процесс сможет иметь независимые от основной ОС стеки протоколов IPv4 и IPv6, таблицы маршрутизации и др.
+- PID namespace - процесс будет иметь отдельное представление дерева процессов.
+- user namespace - процесс с таким пространством имён будет иметь отдельный набор UID, GID. Например суперпользователь в этом пространстве имён не будет иметь ничего общего с суперпользователем из основной ОС.
+
+Чтобы понять лучше эти механизмы можно воспользоваться двумя утилитами: unshare и nsenter. Первая позволить из командной строки создавать пространства имен для отдельных процессов, а вторая подключаться к уже созданным пространствам имён.
+
+Когда прийдёт понимание этих механизмов, то при необходимости использования контейнерной виртуализации вы сами себя будете спрашивать: "- Мне действительно нужно использовать docker с его абстракциями в тысячи строк кода или можно обойтись более простыми средствами?".
+
+Прекрасной иллюстрацией к сказанному будет статья, в которой автор описывает тестирование сетевого сервера lldpd с использованием pytest и сетевых пространств имён - https://vincent.bernat.ch/en/blog/2016-testing-pytest-linux-namespaces.
+```
+---
+# 09. Docker
+
+---
+# 10. Ansible
+ansible-inventory --graph --vars
+
+- [Динамическое инвентори в Ansible](https://medium.com/@Nklya/%D0%B4%D0%B8%D0%BD%D0%B0%D0%BC%D0%B8%D1%87%D0%B5%D1%81%D0%BA%D0%BE%D0%B5-%D0%B8%D0%BD%D0%B2%D0%B5%D0%BD%D1%82%D0%BE%D1%80%D0%B8-%D0%B2-ansible-9ee880d540d6)
+- 
+
+---
+# 11 Namespaces, cgroups
+- systemd-cgtop, systemd-cls
+- chroot, jail, clone, setns, unshare, nsenter, /proc/<PID>/ns/, subuid
+- /etc/subuid, /etc/subgid
+- atop, sar
+- seccomp, captest, filecap, netcap, pscap
+- [cgroups](https://habr.com/ru/company/redhatrussia/blog/423051/)
+- [namespaces](https://www.polarsparc.com/xhtml/Containers-1.html), [part 2](https://www.polarsparc.com/xhtml/Containers-2.html)
+- [Изолируем демоны с systemd](https://habr.com/ru/post/270165/)
+
+### Controllers
+- blkio: управление доступно полосой при доступе к блочным устройствам
+- cpu: управление доступом к ресурсам процессора
+- cpuacct: аккаунтинг cpu; используется совместно с контроллером cpu
+- cpuset: выделение отдельных процессоров группе 
+- devices: ограничение доступа к устройствам
+- freezer: заморозка процессов (спасибо команде OpenVZ)
+- memory: ограничение памяти для группы
+- net_cls: шейпинг (man 8 tc)
+- perf_event: интерфей сдля perf
+- hugetlb: ограничение работы с huge pages
+- pid: ограничение числа процессов
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
+[Ещё](https://github.com/trimstray/test-your-sysadmin-skills)
 LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
 File Systems: Deny root delete, Suid Bit, Journaling file system, COW
 Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, Swarm
 
+---
+# Additional
+nginx, resty, lua - сборка RPM - самое начало видео 11 части
+
+
+---
+# vim
+u - undo
+ctrl+r - redo
+A/I (^$)- string start/end
+w/W (b/B) - one word forward (backward)
+gg - to first line
+G - to last line
+:30 - to line 30
+ctrl+u/d - pgup/pgdn
+z/zt - 
+dd/d^/d$/dw - delete line, to linestart, to linednd, delete word
+dt. - delete all before .
+x - delete symbol under cursor
+2yy - copy 2 lines
+p/P - paste
+s/что менять/на что менять - в строке
+%s/что менять/на что менять - во всем файле
+<</>> - сдвинуть строку
