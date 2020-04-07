@@ -223,9 +223,18 @@ ansible-inventory --graph --vars
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
 [Ещё](https://github.com/trimstray/test-your-sysadmin-skills)
+- работа тут [glassdoor](https://glassdoor.com/), [quora](https://www.quora.com/), [myvisajobs](http://myvisajobs.com/), [indeed](http://indeed.com/)
+- как устраиваться [Цинизм в IT: Павел Одинцов, CloudFlare](https://www.stableit.ru/2016/09/blog-post_27.html?m=1)
 LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
 File Systems: Deny root delete, Suid Bit, Journaling file system, COW
 Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, Swarm
+- Процесс на С съел 100% CPU. Как узнать почему?
+- Сервер писал в файл. Произошел kernel panic, данные стерлись. Почему? Как этого избежать?
+- Что такое Page Cache? Coredump? CPU HW exception?
+- Есть ли утечки памяти в языках с garbage collector?
+- SIGKILL VS SIGINT
+- Будет ли блокироваться запись в сетевой сокет если удаленный сервер ещё не принял данные?
+
 
 ---
 # Additional
