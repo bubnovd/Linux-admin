@@ -238,8 +238,8 @@ Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, S
 ---
 # 12. Performance
 ### Utilites & man pages
-vmstat, pidstat, iostat, iotop, sar, top
-
+vmstat, pidstat, iostat, iotop, sar, top, atop
+vmstat поле b - uninterruptable sleep - Если процессы в системе приостанавливаются из-за перегрузки памяти, то прирост нитей отражает именно значение в столбце b отчета vmstat, а не число нитей в очереди выполнения.(нить = поток?)[отсюда](https://www.ibm.com/support/knowledgecenter/ru/ssw_aix_72/performance/vmstat_command.html)
 Кол-во процессов >500 на ядро - плохо. Много вермени уходит на переключение контекста
 
 
