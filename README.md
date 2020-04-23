@@ -157,6 +157,7 @@ exec
 - fork, clone
 - unshare, nsenter
 - [Основы работы с сигналами](https://www.ibm.com/developerworks/ru/library/l-signals_1/index.html)
+- [Linux process states with examples](https://idea.popcount.org/2012-12-11-linux-process-states/)
 - [Updating ulimit on a running Linux process](https://www.gregchapple.com/blog/updating-ulimit-on-running-linux-process/)
 
 
@@ -200,7 +201,7 @@ ansible-inventory --graph --vars
 ---
 # 11 Namespaces, cgroups
 - systemd-cgtop, systemd-cls
-- chroot, jail, clone, setns, unshare, nsenter, /proc/<PID>/ns/, subuid
+- chroot, jail, clone, setns, unshare, nsenter, /proc/<PID>/ns/, subuid, lsns, unshare, libcgroup-tools, cgget
 - /etc/subuid, /etc/subgid
 - atop, sar
 - seccomp, captest, filecap, netcap, pscap
@@ -220,20 +221,6 @@ ansible-inventory --graph --vars
 - perf_event: интерфей сдля perf
 - hugetlb: ограничение работы с huge pages
 - pid: ограничение числа процессов
----
-[Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
-[Ещё](https://github.com/trimstray/test-your-sysadmin-skills)
-- работа тут [glassdoor](https://glassdoor.com/), [quora](https://www.quora.com/), [myvisajobs](http://myvisajobs.com/), [indeed](http://indeed.com/)
-- как устраиваться [Цинизм в IT: Павел Одинцов, CloudFlare](https://www.stableit.ru/2016/09/blog-post_27.html?m=1)
-LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
-File Systems: Deny root delete, Suid Bit, Journaling file system, COW
-Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, Swarm
-- Процесс на С съел 100% CPU. Как узнать почему?
-- Сервер писал в файл. Произошел kernel panic, данные стерлись. Почему? Как этого избежать?
-- Что такое Page Cache? Coredump? CPU HW exception?
-- Есть ли утечки памяти в языках с garbage collector?
-- SIGKILL VS SIGINT
-- Будет ли блокироваться запись в сетевой сокет если удаленный сервер ещё не принял данные?
 
 ---
 # 12. Performance
@@ -241,6 +228,52 @@ Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, S
 vmstat, pidstat, iostat, iotop, sar, top, atop
 vmstat поле b - uninterruptable sleep - Если процессы в системе приостанавливаются из-за перегрузки памяти, то прирост нитей отражает именно значение в столбце b отчета vmstat, а не число нитей в очереди выполнения.(нить = поток?)[отсюда](https://www.ibm.com/support/knowledgecenter/ru/ssw_aix_72/performance/vmstat_command.html)
 Кол-во процессов >500 на ядро - плохо. Много вермени уходит на переключение контекста
+
+- Paging refers to writing portions, termed pages, of a process' memory to disk. Swapping, strictly speaking, refers to writing the entire process, not just part, to disk
+- Page-Out - запись страницы на диск. Page-In - возврат с диска в физическую память
+- Page fault - когда ядру нужна страница, но её нет в физической памяти. Требуется выполнить Page-In
+- thrashing - постоянный page-in - page-out
+- Huge Page - большие страницы (больше 4 кБ)
+- [Page Cache](https://www.thomas-krenn.com/en/wiki/Linux_Page_Cache_Basics) - файлы с HDD, хранящиеся в RAM для бстрого доступа к ним. Поле Cache в выводе команды  free
+- Dirty Pages - страницы в Page Cache, которые ещё не были записаны на диск. После вызова sync пишутся на диск
+- [strace в Linux](https://habr.com/ru/company/badoo/blog/493856/)
+
+---
+# 14. AAA
+### Utilites & man pages
+useradd, passwd, usermod, userdel, groupadd, groupdel, groupmod, groups, id, newgrp, gpasswd, chgrp, chown, chmod
+
+- SUID, SGID
+- sticky bit - Каталог с установленным sticky-битом означает, что удалить файл из этого каталога может только владелец файла или суперпользователь
+- umask - вычитаемая маска для определения прав файлов и каталогов при создании:
+  - полная маска для каталога 777
+  - umask -  022
+  - созданный каталог с правами 755
+- capabilities: getcap, setcap, capsh
+- PolKit: pkaction, pkcheck, pkexec, pkttyagent
+- ACL: setfacl, 
+- PAM: ldd /bin/su | grep pam
+- [Whai is PAM?](https://medium.com/information-and-technology/wtf-is-pam-99a16c80ac57)
+- [Основы и настройка PAM](https://www.ibm.com/developerworks/ru/library/l-pam/index.html)
+- [CAP_SYS_ADMIN: the new root](https://lwn.net/Articles/486306/)
+- [OpenNET. Как работает PAM](https://www.opennet.ru/base/net/pam_linux.txt.html)
+- [Linux Capabilities In Practice](https://blog.container-solutions.com/linux-capabilities-in-practice)
+- AppArmor
+
+
+---
+# 15. SELinux
+### Utilites & man pages
+sesearch, seinfo, findcon, audit2allow, audit2why, chcon, restorecon, autorelabel, getsebool, setsebool
+- [ SELinux/Tutorials/How does a process get into a certain context ](https://wiki.gentoo.org/wiki/SELinux/Tutorials/How_does_a_process_get_into_a_certain_context)
+
+
+---
+# 16. Backup
+- [vagrant-bacula](https://github.com/haf/vagrant-bacula)
+- [Linux rsync command](https://www.computerhope.com/unix/rsync.htm)
+- [ Cкоростная синхронизация миллиарда файлов ](https://habr.com/en/post/132098/)
+- [ Сравнение способов резервного копирования ](https://habr.com/en/company/selectel/blog/226831/)
 
 
 ---
@@ -251,6 +284,8 @@ nginx, resty, lua - сборка RPM - самое начало видео 11 ч�
 
 ---
 # vim
+- [vi philosophy. Best abou vi!](https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim)
+- [intercative](https://vim-adventures.com/) [tutorials](https://www.openvim.com/)
 u - undo
 ctrl+r - redo
 A/I (^$)- string start/end
@@ -268,3 +303,68 @@ p/P - paste
 s/что менять/на что менять - в строке
 %s/что менять/на что менять - во всем файле
 <</>> - сдвинуть строку
+
+---
+[Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
+[Ещё](https://github.com/trimstray/test-your-sysadmin-skills)
+- работа тут [glassdoor](https://glassdoor.com/), [quora](https://www.quora.com/), [myvisajobs](http://myvisajobs.com/), [indeed](http://indeed.com/)
+- как устраиваться [Цинизм в IT: Павел Одинцов, CloudFlare](https://www.stableit.ru/2016/09/blog-post_27.html?m=1)
+LoadAvarage, Process Scheduling, IO Scheduling, Kernel Modules
+File Systems: Deny root delete, Suid Bit, Journaling file system, COW
+Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, Swarm
+- Процесс на С съел 100% CPU. Как узнать почему?
+- Сервер писал в файл. Произошел kernel panic, данные стерлись. Почему? Как этого избежать?
+- Что такое Page Cache? Coredump? CPU HW exception?
+- Есть ли утечки памяти в языках с garbage collector?
+- SIGKILL VS SIGINT
+- Будет ли блокироваться запись в сетевой сокет если удаленный сервер ещё не принял данные?
+
+---
+# Performance Lab
+Dmitry Bubnov, [16.04.20 09:21]
+[Forwarded from Вадим Исаканов]
+Глянь еще https://youtu.be/gXeaeOAIfvc
+
+Dmitry Bubnov, [16.04.20 09:21]
+[Forwarded from Вадим Исаканов]
+Еще хорошая статья по докладу с Хайлоуд++
+https://habr.com/ru/post/322562/
+Только переписыванием софта (как тут мемкешед переписывали) тебе заниматься не нужно
+
+Dmitry Bubnov, [16.04.20 09:21]
+[Forwarded from Вадим Исаканов]
+Но в целом - не представляю, как по 1-2 статьям научиться таким вещам
+Нужно разобраться по очереди (в работе или хотя бы в лабе) с каждой из используемых софтин, а затем постепенно усложнять схему (сначала вебсерверы отмасштабировать, потом БД, потом кэши и т.п., на каждом этапе только одно усложнение).
+
+Dmitry Bubnov, [16.04.20 10:35]
+[Forwarded from Slach]
+memcache принято менять на redis и на его мультитредовые аналоги ;)
+а apache менять на nginx
+пока проект мелкий, можно на одном сервере держать
+потом придется переносить, через связку redis и репликацию master-slave (она не только в MySQL бывает, репликация ;)
+
+если тебе хватает CPU и памяти, то можно держать на одном сервере, но сразу тренироваться переносить на другой без простоя... или с минимальным простоем
+
+Dmitry Bubnov, [16.04.20 15:47]
+[Forwarded from Matvey]
+все наверное это знают, и много кто так делает, но все же напишу. Для постоянного изучения и опробации лучше иметь домашний стенд, такой недорого можно собрать на алиэкспресс. На базе китайской материнской платы типа Huanan. Там же к ней продаются серверные процы и память БУ, буквально за 30-35к(сейчас возможно даже дешевле) можно собрать неплохой стенд. К примеру я собрал на базе xeon 2680v2(10 ядер, 20 потоков)+64ГБ reg ecc+nvme накопитель(на него положил диски виртуалок). Для учебных стендов его "за глаза" хватает
+
+--
+Вадим Исаканов, [10.04.20 15:22]
+можно тесты и гонять, думаю
+тут сложности две, заодно две возможности прокачаться
+- сделать тесты, которые правдоподобно эмулируют тысячи подключений в секунду, например, сложно, но можно
+- ну и собсно оптимизацию отточить
+
+Вадим Исаканов, [10.04.20 15:23]
+Отдельная задача - придумать темы тестов
+Можно пробовать построить копии реально работающих сервисов, и тестировать нагрузку на них
+
+Вадим Исаканов, [10.04.20 15:27]
+можно потрейсить любое приложение, которое достаточно быстро исполняется
+пхп какойнибудь потрейсить, там достаточно понятно все
+
+Вадим Исаканов, [10.04.20 15:33]
+Еще есть анализ коредампов
+Похоже на стрейс, но как "снимок памяти в момент проблемы"
+
