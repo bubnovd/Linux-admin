@@ -275,6 +275,37 @@ sesearch, seinfo, findcon, audit2allow, audit2why, chcon, restorecon, autorelabe
 - [ Cкоростная синхронизация миллиарда файлов ](https://habr.com/en/post/132098/)
 - [ Сравнение способов резервного копирования ](https://habr.com/en/company/selectel/blog/226831/)
 
+---
+# 17. Logs
+- [ Аудит системных событий в Linux ](https://habr.com/en/company/selectel/blog/267833/)
+- [ Kdump — диагностика и анализ причин сбоев ядра ](https://habr.com/en/company/selectel/blog/226487/)
+- [Анализ падения ядра в Linux ](http://geckich.blogspot.com/2013/11/linux-kernel-crash-dump.html)
+- [Аудит системных событий](https://xakep.ru/2011/03/30/54897/)
+- [Удаленное логирование в journald или Всё ещё «это вам не нужно»?](https://habr.com/en/company/southbridge/blog/317182/)
+
+### JournalD options
+- journalctl --field=_TRANSPORT - все доступные транспорты
+-  journalctl _TRANSPORT=syslog - то, что пришло через syslog
+- journalctl _TRANSPORT=syslog -o verbose - структурированные данные
+- journalctl -p crit
+ -p
+  emerg (0)
+  alert (1) - PRIORITY=1
+  crit (2) - PRIORITY=1
+  err (3) - PRIORITY=3
+  warning (4)
+  notice (5)
+  info (6)
+  debug (7)
+- journactl -u mysqld.service -f - отслеживание лога mysql (аналог tail -f)
+- journalctl _UID=0 - все с UID 0
+- journalctl --list-boots - показать время ребутов сервера (если нет директории то будет показан только последний)
+- journalctl -b -2 - показать логи второго бута
+
+
+---
+# 18. Архитектура сетей
+
 
 ---
 # Additional
