@@ -159,6 +159,7 @@ exec
 - [Основы работы с сигналами](https://www.ibm.com/developerworks/ru/library/l-signals_1/index.html)
 - [Linux process states with examples](https://idea.popcount.org/2012-12-11-linux-process-states/)
 - [Updating ulimit on a running Linux process](https://www.gregchapple.com/blog/updating-ulimit-on-running-linux-process/)
+- [Linux Performance Analysis in 60,000 Milliseconds](https://netflixtechblog.com/linux-performance-analysis-in-60-000-milliseconds-accc10403c55)
 
 
 ![ps](img/ps.png)
