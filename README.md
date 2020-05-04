@@ -306,7 +306,11 @@ sesearch, seinfo, findcon, audit2allow, audit2why, chcon, restorecon, autorelabe
 
 ---
 # 18. Архитектура сетей
-
+- [Network Manager CLI](https://fedoraproject.org/wiki/Networking/CLI)
+- [A tcpdump Tutorial with Examples ](https://danielmiessler.com/study/tcpdump/)
+- [tcpdump examples](https://www.thegeekstuff.com/2010/08/tcpdump-command-examples)
+- [IPROUTE2 Utility Suite Howto](http://policyrouting.org/iproute2-toc.html)
+- []
 
 ---
 # Additional
