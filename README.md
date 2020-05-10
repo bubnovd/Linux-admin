@@ -128,6 +128,8 @@ exec
 - [bash-скрипты на хабре](https://habr.com/en/company/ruvds/blog/325522/)
 - [Bash Guide for Beginners](https://www.tldp.org/LDP/Bash-Beginners-Guide/html/)
 - [Bash Cheatsheet](https://devhints.io/bash)
+- [Anybody can write good bash](https://blog.yossarian.net/2020/01/23/Anybody-can-write-good-bash-with-a-little-effort)
+- [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
 
 ![hotkeys](img/hotkeys.png)
 
@@ -312,6 +314,29 @@ sesearch, seinfo, findcon, audit2allow, audit2why, chcon, restorecon, autorelabe
 - [IPROUTE2 Utility Suite Howto](http://policyrouting.org/iproute2-toc.html)
 - []
 
+
+---
+# 19. LDAP
+FreeIPA, Apache Directory Studio, ldapvi, NSSS, SSSD, NSSwitch
+- [Introduction to Red Hat Identity Management](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/linux_domain_identity_authentication_and_policy_guide/introduction)
+- [Про LDAP по-русски](https://pro-ldap.ru/)
+
+---
+# 20. VLAN, LACP
+[Network Tuning](https://wwwx.cs.unc.edu/~sparkst/howto/network_tuning.php)
+
+---
+# 21. Trffic Filtering
+- [Учебник IPTables U32](https://binarylife.ru/iptables-u32-uchebnik/)
+- [Руководство по iptables](https://www.opennet.ru/docs/RUS/iptables/)
+- [FirewallD](https://fedoraproject.org/wiki/FirewallD/ru)
+- [TPROXY](https://www.kernel.org/doc/Documentation/networking/tproxy.txt)
+- [ipset](http://ipset.netfilter.org/features.html)
+- [Port knocking](https://wiki.archlinux.org/index.php/Port_knocking)
+- [Iptables Tutorial](https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html)
+- [Борьба с SYN-флудом при помощи iptables и SYNPROXY](https://www.opennet.ru/tips/2928_linux_iptables_synflood_synproxy_ddos.shtml)
+- [sysctl_conntrack](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt)
+- [ Understanding Firewalld in Multi-Zone Configurations ](https://www.linuxjournal.com/content/understanding-firewalld-multi-zone-configurations)
 ---
 # Additional
 nginx, resty, lua - сборка RPM - самое начало видео 11 части
