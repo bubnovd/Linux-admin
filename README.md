@@ -130,6 +130,7 @@ exec
 - [Bash Cheatsheet](https://devhints.io/bash)
 - [Anybody can write good bash](https://blog.yossarian.net/2020/01/23/Anybody-can-write-good-bash-with-a-little-effort)
 - [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html)
+- [Дюжина приемов в Linux, которые действительно сэкономят уйму времени](https://habr.com/ru/post/340544/)
 
 ![hotkeys](img/hotkeys.png)
 
@@ -285,10 +286,12 @@ sesearch, seinfo, findcon, audit2allow, audit2why, chcon, restorecon, autorelabe
 - [Анализ падения ядра в Linux ](http://geckich.blogspot.com/2013/11/linux-kernel-crash-dump.html)
 - [Аудит системных событий](https://xakep.ru/2011/03/30/54897/)
 - [Удаленное логирование в journald или Всё ещё «это вам не нужно»?](https://habr.com/en/company/southbridge/blog/317182/)
+- [Настройка Rsyslog](http://www.k-max.name/linux/rsyslog-na-debian-nastrojka-servera/)
+- [Управление демоном syslogD](http://www.k-max.name/linux/syslogd-and-logrotate/)
 
 ### JournalD options
 - journalctl --field=_TRANSPORT - все доступные транспорты
--  journalctl _TRANSPORT=syslog - то, что пришло через syslog
+- journalctl _TRANSPORT=syslog - то, что пришло через syslog
 - journalctl _TRANSPORT=syslog -o verbose - структурированные данные
 - journalctl -p crit
  -p
@@ -337,6 +340,22 @@ FreeIPA, Apache Directory Studio, ldapvi, NSSS, SSSD, NSSwitch
 - [Борьба с SYN-флудом при помощи iptables и SYNPROXY](https://www.opennet.ru/tips/2928_linux_iptables_synflood_synproxy_ddos.shtml)
 - [sysctl_conntrack](https://www.kernel.org/doc/Documentation/networking/nf_conntrack-sysctl.txt)
 - [ Understanding Firewalld in Multi-Zone Configurations ](https://www.linuxjournal.com/content/understanding-firewalld-multi-zone-configurations)
+
+
+---
+# 26.DNS
+- [How DNSSEC Works](https://www.cloudflare.com/dns/dnssec/how-dnssec-works/)
+- [the Bundy Administration Guide](http://bundy-dns.de/documentation.html)
+- [Split DNS](http://it2web.ru/index.php/dns/77-split-dns-nauchim-bind-rabotat-na-dva-tri-chetyre-i-bolee-frontov)
+- [Understanding views in BIND 9, by example](https://kb.isc.org/docs/aa-00851)
+- [DNS сервер BIND (теория)](https://habr.com/en/post/137587/)
+- [Настройка Dynamic DNS на базе Bind9 и nsupdate](http://sudouser.com/nastrojka-dynamic-dns-na-baze-bind9-i-nsupdate.html)
+- [Пряморукий DNS: делаем правильно](https://habr.com/ru/company/oleg-bunin/blog/350550/)
+- [Настройка DNSSEC на BIND](https://www.dmosk.ru/miniinstruktions.php?mini=dnssec-bind)
+
+### Homework
+https://github.com/erlong15/vagrant-bind
+
 ---
 # Additional
 nginx, resty, lua - сборка RPM - самое начало видео 11 части
