@@ -113,6 +113,7 @@ Systemd-nspawn
 - machinectl
 - [systemd docs](http://0pointer.de/blog/projects/systemd-docs.html)
 - [systemd для системного администратора](https://mega.nz/#F!OdFEnYAK!dpUB6_qA_iKD1yTUa9S1_g?KIsjzQaK)
+- [Using systemd features to secure services](https://www.redhat.com/sysadmin/systemd-secure-services)
 
 ---
 # 06. BASH, AWK
@@ -212,6 +213,7 @@ ansible-inventory --graph --vars
 - [cgroups](https://habr.com/ru/company/redhatrussia/blog/423051/)
 - [namespaces](https://www.polarsparc.com/xhtml/Containers-1.html), [part 2](https://www.polarsparc.com/xhtml/Containers-2.html)
 - [Изолируем демоны с systemd](https://habr.com/ru/post/270165/)
+- [A deep dive into Linux namespaces](http://ifeanyi.co/posts/linux-namespaces-part-1/)
 
 ### Controllers
 - blkio: управление доступно полосой при доступе к блочным устройствам
@@ -357,9 +359,23 @@ FreeIPA, Apache Directory Studio, ldapvi, NSSS, SSSD, NSSwitch
 https://github.com/erlong15/vagrant-bind
 
 ---
+# 27. Web
+siege, Yandex tank, tsung, proxysql, odyssey (SQL DB)
+syscalls: select(), epoll(), io_submit()
+ghost
+- [nginx. Руководство для начинающих](http://nginx.org/ru/docs/beginners_guide.html)
+- [nginx tutorial](https://www.netguru.com/codestories/nginx-tutorial-basics-concepts)
+- [nginx tutorials](https://github.com/agile6v/awesome-nginx#tutorials)
+- [High Performance Browser Networking](https://hpbn.co/)
+- [DO nginx configurator](https://www.digitalocean.com/community/tools/nginx)
+- [select, poll, epoll](https://habr.com/ru/company/infopulse/blog/415259/)
+- [PHP FPM Optimization](https://geekflare.com/php-fpm-optimization/)
+
+---
 # Additional
 nginx, resty, lua - сборка RPM - самое начало видео 11 части
 [AWS](https://github.com/nickpoida/og-aws)
+- [ipvs](https://habr.com/ru/post/104621/), [ещё](https://medium.com/@benmeier_/a-quick-minimal-ipvs-load-balancer-demo-d5cc42d0deb4)
 
 
 ---
