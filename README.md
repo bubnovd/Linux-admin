@@ -382,6 +382,7 @@ nginx, resty, lua - сборка RPM - самое начало видео 11 ч�
 # vim
 - [vi philosophy. Best abou vi!](https://stackoverflow.com/questions/1218390/what-is-your-most-productive-shortcut-with-vim)
 - [intercative](https://vim-adventures.com/) [tutorials](https://www.openvim.com/)
+- [Advices](https://dev.to/ka11away/7-vim-tips-that-changed-my-life-with-demo-51hg)
 u - undo
 ctrl+r - redo
 A/I (^$)- string start/end
@@ -399,6 +400,8 @@ p/P - paste
 s/что менять/на что менять - в строке
 %s/что менять/на что менять - во всем файле
 <</>> - сдвинуть строку
+S - прыгнуть на нужное кол-во отступов
+% - прыгнуть на открывающую/закрывающую скобку
 
 ---
 [Частые вопросы на собеседованиях:](https://docs.google.com/presentation/d/1KDDRYFesje2auTqvKv47JZmCY1mQ8S96ok7FF6geLL4/edit#slide=id.g43c1a38660_0_11)
