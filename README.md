@@ -135,6 +135,10 @@ exec
 - [pure sh bible](https://github.com/dylanaraps/pure-sh-bible)
 - [pure bash bible](https://github.com/dylanaraps/pure-bash-bible)
 - [20 приёмов работы в командной строке Linux, которые сэкономят уйму времени](https://habr.com/ru/company/ruvds/blog/339820/)
+- [Security implications of forgetting to quote a variable in bash/POSIX shells](https://unix.stackexchange.com/questions/171346/security-implications-of-forgetting-to-quote-a-variable-in-bash-posix-shells#answer-171347)
+- [Better BASHing Through Technology](https://andydote.co.uk/2020/08/28/better-bashing-through-technology/)
+- [ShellCheck, a static analysis tool for shell scripts](https://github.com/koalaman/shellcheck/)
+- [Bash obfuscation framework](https://github.com/Bashfuscator/Bashfuscator)
 
 ![hotkeys](img/hotkeys.png)
 
