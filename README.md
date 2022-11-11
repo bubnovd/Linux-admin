@@ -424,9 +424,12 @@ Network: TIME_WAIT, Shaped Ingress, Vlan, NAT, Bridge, Cluster Networking: K8, S
 - Есть ли утечки памяти в языках с garbage collector?
 - SIGKILL VS SIGINT
 - Будет ли блокироваться запись в сетевой сокет если удаленный сервер ещё не принял данные?
-что делает скрипт?
+- Что делает скрипт?
+```
 #!/bin/env bash
 while read k;
 do echo $k;
 done < ./r;
 ---
+```
+- Что происходит при kubectl create pod? Взаимодействие etcd, api-manager, resource-controller, kubelet
