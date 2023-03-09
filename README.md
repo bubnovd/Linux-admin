@@ -391,23 +391,41 @@ nginx, resty, lua - сборка RPM - самое начало видео 11 ч�
 - [intercative](https://vim-adventures.com/) [tutorials](https://www.openvim.com/)
 - [Advices](https://dev.to/ka11away/7-vim-tips-that-changed-my-life-with-demo-51hg)
 u - undo
+
 ctrl+r - redo
+
 A/I (^$)- string start/end
+
 w/W (b/B) - one word forward (backward)
+
 gg - to first line
+
 G - to last line
+
 :30 - to line 30
+
 ctrl+u/d - pgup/pgdn
+
 z/zt - 
+
 dd/d^/d$/dw - delete line, to linestart, to linednd, delete word
+
 dt. - delete all before .
+
 x - delete symbol under cursor
+
 2yy - copy 2 lines
+
 p/P - paste
+
 s/что менять/на что менять - в строке
+
 %s/что менять/на что менять - во всем файле
+
 <</>> - сдвинуть строку
+
 S - прыгнуть на нужное кол-во отступов
+
 % - прыгнуть на открывающую/закрывающую скобку
 
 ---
